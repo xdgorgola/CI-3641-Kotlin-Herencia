@@ -1,7 +1,7 @@
 /** Clase que representa una secuencia de objetos sencilla */
 abstract class Secuencia<T> {
 
-    protected val contenedor = mutableListOf<T>();
+    protected open val contenedor = mutableListOf<T>();
 
     /** Agrega un objeto a la secuencia
      *

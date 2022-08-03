@@ -21,17 +21,53 @@ class Grafo {
         return numeroVert()
     }
 
+    /** Quita un vertice al grafo.
+     *
+     * Quita un vertice del grafo. Es importante destacar
+     * que al quitar un vertice, todos los vertices en el
+     * grafo con una ID mayor a este, van a reducir su
+     * ID en 1
+     *
+     * @param f Vertice a quitar
+     */
+    fun quitarVert(f: Int) {
+        if (f >= ady.size)
+            throw Exception("Vertice no existente en el grafo")
+
+        ady.removeAt(f)
+    }
+
     /** Agrega un arco entre dos vertices.
      *
      * @param f Vertice inicio del arco
      * @param t Vertice final del arco
      */
-    fun agregarArco(f: Int, t: Int)
-    {
+    fun agregarArco(f: Int, t: Int) {
         if (f >= ady.size || t >= ady.size)
             throw Exception("Vertices no existentes en el grafo")
 
         ady[f].add(t)
+    }
+
+    /** Quita un arco entre dos vertices
+     *
+     * @param f Vertice inicio del arco
+     * @param t Vertice final del arco
+     *
+     * @return true si el arco existia. false en caso contrario.
+     */
+    fun quitarArco(f: Int, t: Int): Boolean {
+        if (f >= ady.size || t >= ady.size)
+            throw Exception("Vertices no existentes en el grafo")
+
+        for (i in 0..ady[f].size) {
+            if (ady[f][i] == t) {
+                ady[f].removeAt(i)
+                return true
+            }
+        }
+
+        return false
     }
 
     /** Retorna los vecinos de un vertice
@@ -40,8 +76,7 @@ class Grafo {
      *
      * @return Lista inmutable con los vecinos del vertice
      */
-    fun vecinos(id: Int): List<Int>
-    {
+    fun vecinos(id: Int): List<Int> {
         if (id >= ady.size)
             throw Exception("Vertice no existente en el grafo")
 
